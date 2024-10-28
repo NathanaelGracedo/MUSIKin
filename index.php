@@ -59,7 +59,7 @@
     </section>
     <hr class="mx-auto my-28 h-0.5 w-4/5 bg-slate-950" />
 
-    <!-- List Of Products -->
+    <!-- List Of rows -->
     <main class="mx-auto mb-20 w-4/5 flex flex-col" id="daftar-alat-musik">
         <span class="absolute left-0 top-[75rem] -z-10 h-96 w-96 bg-teal-500/20 blur-3xl"></span>
         <section class="cursor-default font-bold text-center text-4xl">
@@ -67,56 +67,52 @@
         </section>
         <section class="mt-10 grid grid-cols-1 place-items-center gap-12 lg:grid-cols-3 sm:grid-cols-2">
             <?php
+            include "utils/connection.php";
 
-            // Ini hanya sampel saja.
-            $products = [
-                ['name' => 'Guitar Yamaha', 'image' => 'images/guitar.jpg', 'price' => 'Rp 2.500.000', 'description' => 'Guitar Yamaha with rich sound and high quality build.'],
-                ['name' => 'Digital Piano', 'image' => 'images/piano.jpg', 'price' => 'Rp 5.000.000', 'description' => 'Digital piano with authentic sound and multiple features.'],
-                ['name' => 'Drum Set', 'image' => 'images/drums.jpg', 'price' => 'Rp 3.000.000', 'description' => 'Complete drum set for professionals.'],
-                ['name' => 'Bass Guitar', 'image' => 'images/bass.jpg', 'price' => 'Rp 3.500.000', 'description' => 'High-quality bass guitar with deep sound.'],
-                ['name' => 'Violin', 'image' => 'images/violin.jpg', 'price' => 'Rp 2.000.000', 'description' => 'Classical violin with superior tone.'],
-                ['name' => 'Ukulele', 'image' => 'images/ukulele.jpg', 'price' => 'Rp 1.500.000', 'description' => 'Compact ukulele, perfect for beginners.'],
-                ['name' => 'Harmonica', 'image' => 'images/harmonica.jpg', 'price' => 'Rp 500.000', 'description' => 'Easy-to-learn harmonica with a sweet tone.'],
-                ['name' => 'Electric Guitar', 'image' => 'images/electric_guitar.jpg', 'price' => 'Rp 4.000.000', 'description' => 'High-performance electric guitar for rock enthusiasts.'],
-                ['name' => 'Flute', 'image' => 'images/flute.jpg', 'price' => 'Rp 1.800.000', 'description' => 'Classical flute with crisp sound and precision.'],
-            ];
-
-            foreach ($products as $index => $product) {
+            $sql = "select * from Produk";
+            $stmt = sqlsrv_query($conn, $sql);
+    
+            while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
                 // Menampilkan produk dengan onclick yang akan memanggil fungsi JavaScript untuk membuka modal
+                 $produk_id = $row['ProdukID'];
+                if  ($row['Gambar'] > 0) {
+                    $base64Image = base64_encode($row['Gambar']);
+                
                 echo
                 "<figure class='w-full flex cursor-pointer flex-col items-center justify-center py-10 rounded-xl bg-slate-100 border-2 border-slate-950/30'>
-                    <img src='$product[image]' alt='$product[name]' class='w-4/5 rounded-2xl transition-all duration-300 ease-in-out xl:hover:scale-105' />
+                    <img src='data:image/jpeg;base64, $base64Image' alt='Gambar Produk' class='w-4/5 rounded-2xl transition-all duration-300 ease-in-out xl:hover:scale-105' />
                     <div class='mx-auto mt-4 w-4/5 flex flex-col'>
                         <div class='flex items-center justify-between'>
                             <figcaption class='group text-justify text-slate-950 transition-all duration-300 ease-in-out'>
                                 <span class='font-bold lg:bg-gradient-to-r lg:from-sky-500 lg:to-sky-500 lg:bg-[length:0%_0.125rem] lg:bg-left-bottom lg:bg-no-repeat lg:transition-all lg:duration-500 lg:ease-out lg:group-hover:bg-[length:100%_0.125rem]'>
-                                    $product[name]
+                                    $row[NamaProduk]  
                                 </span>
                             </figcaption>
                             <h5 class='text-sm'>
-                                Stok: ???
+                                Stok: $row[Stok]
                             </h5>
                         </div>
                         <figcaption class='group text-justify text-slate-950 transition-all duration-300 ease-in-out'>
                             <em class='lg:bg-gradient-to-r lg:from-sky-500 lg:to-sky-500 lg:bg-[length:0%_0.125rem] lg:bg-left-bottom lg:bg-no-repeat lg:transition-all lg:duration-500 lg:ease-out lg:group-hover:bg-[length:100%_0.125rem]'>
-                                $product[price]
+                                $row[Harga]
                             </em>
                         </figcaption>
                         <figcaption class='group text-justify text-slate-950 transition-all duration-300 ease-in-out'>
                             <span class='lg:bg-gradient-to-r lg:from-sky-500 lg:to-sky-500 lg:bg-[length:0%_0.125rem] lg:bg-left-bottom lg:bg-no-repeat lg:transition-all lg:duration-500 lg:ease-out lg:group-hover:bg-[length:100%_0.125rem]'>
-                                $product[description]
+                                $row[Deskripsi]
                             </span>
                         </figcaption>
                     </div>
-                    <button type='button' class='mt-8 w-4/5 py-3 rounded-md bg-green-700 text-slate-50 transition-all duration-300 ease-in-out xl:hover:bg-green-600'>
+                   <button type='button' class='mt-8 w-4/5 py-3 rounded-md bg-green-700 text-slate-50 transition-all duration-300 ease-in-out xl:hover:bg-green-600' onclick=\"window.location.href='update-produk.php?id={$produk_id}'\">
                         <i class='fa-solid fa-pencil mr-3' aria-hidden='true'></i>
                         Edit
                     </button>
-                    <button type='button' class='mt-4 w-4/5 py-3 rounded-md bg-red-500 text-slate-50 transition-all duration-300 ease-in-out xl:hover:bg-red-400'>
+                    <button type='button' class='mt-4 w-4/5 py-3 rounded-md bg-red-500 text-slate-50 transition-all duration-300 ease-in-out xl:hover:bg-red-400' onclick=\"if(confirm('Apakah Anda yakin ingin menghapus produk ini?')) { window.location.href='utils/proses_hapus_produk.php?id={$produk_id}' }\">
                         <i class='fa-solid fa-trash mr-3' aria-hidden='true'></i>
                         Hapus
                     </button>
                 </figure>";
+                }
             }
             ?>
         </section>
