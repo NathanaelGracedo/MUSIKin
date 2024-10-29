@@ -44,19 +44,19 @@
 
     // Mendapatkan ID produk dari URL
     if (isset($_GET['id'])) {
-    $produk_id = $_GET['id'];
+        $produk_id = $_GET['id'];
 
-    // Query untuk mengambil data produk berdasarkan ID
-    $sql = "SELECT * FROM Produk WHERE ProdukID = ?";
-    $params = array($produk_id);
-    $stmt = sqlsrv_query($conn, $sql, $params);
+        // Query untuk mengambil data produk berdasarkan ID
+        $sql = "SELECT * FROM Produk WHERE ProdukID = ?";
+        $params = array($produk_id);
+        $stmt = sqlsrv_query($conn, $sql, $params);
 
-    if ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-        $nama = $row['NamaProduk'];
-        $harga = $row['Harga'];
-        $stok = $row['Stok'];
-        $deskripsi = $row['Deskripsi'];
-        // Tidak menampilkan gambar dalam form update, karena akan dikelola terpisah
+        if ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+            $nama = $row['NamaProduk'];
+            $harga = $row['Harga'];
+            $stok = $row['Stok'];
+            $deskripsi = $row['Deskripsi'];
+            // Tidak menampilkan gambar dalam form update, karena akan dikelola terpisah
         } else {
             die("Produk tidak ditemukan.");
         }
@@ -65,14 +65,13 @@
     }
     ?>
     <h3 class="mt-20 mb-6 mx-auto w-4/5 cursor-default text-3xl font-bold">Edit Produk</h3>
-    <form action="utils/proses_update_produk.php" method="post" enctype="multipart/form-data" class="mx-auto mb-28 w-4/5 flex flex-col">
+    <form action="utils/proses-perbarui-produk.php" method="post" enctype="multipart/form-data" class="mx-auto mb-28 w-4/5 flex flex-col">
         <section class="flex gap-20 items-center justify-between">
-                <input
-                    type="hidden"
-                    name="id"
-                    value="<?= htmlspecialchars($produk_id) ?>" 
-                    />
-            <div class="w-full flex flex-col"> 
+            <input
+                type="hidden"
+                name="id"
+                value="<?= htmlspecialchars($produk_id) ?>" />
+            <div class="w-full flex flex-col">
                 <label for="nama_produk">Nama Produk</label>
                 <input
                     type="text"
@@ -81,8 +80,7 @@
                     autocomplete="on"
                     class="mt-1 border-b-2 border-slate-950/50 bg-transparent focus:border-slate-950 focus:outline-none lg:py-3"
                     onchange=""
-                    value="<?= htmlspecialchars($nama) ?>" 
-                    />
+                    value="<?= htmlspecialchars($nama) ?>" />
             </div>
             <div class="w-full flex flex-col">
                 <label for="harga">Harga</label>
@@ -92,9 +90,8 @@
                     id="harga"
                     autocomplete="on"
                     class="mt-1 border-b-2 border-slate-950/50 bg-transparent focus:border-slate-950 focus:outline-none lg:py-3"
-                    onchange="" 
-                    value="<?= htmlspecialchars($harga) ?>"
-                    />
+                    onchange=""
+                    value="<?= htmlspecialchars($harga) ?>" />
             </div>
             <div class="w-full flex flex-col">
                 <label for="stok">Stok</label>
@@ -106,9 +103,8 @@
                     min="0"
                     max="100"
                     class="mt-1 border-b-2 border-slate-950/50 bg-transparent focus:border-slate-950 focus:outline-none lg:py-3"
-                    onchange="" 
-                    value="<?= htmlspecialchars($stok) ?>"
-                    />
+                    onchange=""
+                    value="<?= htmlspecialchars($stok) ?>" />
             </div>
         </section>
         <section class="mt-8 flex flex-col">
@@ -120,8 +116,7 @@
                 class="resize-none border-b-2 border-slate-950/50 bg-transparent focus:border-slate-950 focus:outline-none lg:py-3"
                 onchange=""
                 maxlength="3000"
-                rows="1"
-                >
+                rows="1">
                 <?= htmlspecialchars($deskripsi) ?>
             </textarea>
         </section>
@@ -134,12 +129,11 @@
                 name="gambar"
                 id="gambar"
                 accept=".jpeg, .jpg, .png"
-                class="hidden" 
-                />
+                class="hidden" />
         </section>
         <section class="mt-8 flex flex-col">
             <button type="submit" class="w-fit cursor-pointer rounded bg-green-800 text-slate-50 px-8 py-4 transition-all duration-300 ease-in-out hover:bg-green-700">
-                &emsp;Edit Produk
+                <i class="fa-solid fa-pencil"></i>&emsp;Edit Produk
             </button>
         </section>
     </form>

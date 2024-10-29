@@ -31,7 +31,7 @@
             MUSIKin
         </a>
         <nav class="hidden h-full w-4/5 text-lg font-semibold lg:flex lg:w-5/6 lg:items-center lg:justify-end">
-            <a href="tentang-kami.php" class="mr-14 transition-all duration-300 ease-in-out hover:text-slate-800 hover:underline">
+            <a href="tentang-kami.php" class="transition-all duration-300 ease-in-out hover:text-slate-800 hover:underline">
                 Tentang Kami
             </a>
         </nav>
@@ -40,7 +40,7 @@
 
     <!-- Formulir -->
     <h3 class="mt-20 mb-6 mx-auto w-4/5 cursor-default text-3xl font-bold">Tambah Produk</h3>
-    <form action="utils/proses_tambah_produk.php" method="post" enctype="multipart/form-data" class="mx-auto mb-28 w-4/5 flex flex-col">
+    <form action="utils/proses-tambah-produk.php" method="post" enctype="multipart/form-data" class="mx-auto mb-28 w-4/5 flex flex-col">
         <section class="flex gap-20 items-center justify-between">
             <div class="w-full flex flex-col">
                 <label for="nama_produk">Nama Produk</label>
@@ -110,7 +110,7 @@
         </section>
         <section class="mt-8 flex flex-col">
             <button type="submit" class="w-fit cursor-pointer rounded bg-green-800 text-slate-50 px-8 py-4 transition-all duration-300 ease-in-out hover:bg-green-700">
-                &emsp;Tambahkan Produk
+                <i class="fa-solid fa-plus"></i>&emsp;Tambahkan Produk
             </button>
         </section>
     </form>

@@ -20,4 +20,3 @@ if (isset($_GET['id'])) {
 } else {
     die("ID produk tidak ditentukan.");
 }
-?>

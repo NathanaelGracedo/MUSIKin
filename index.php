@@ -23,7 +23,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="mx-auto max-w-[1440px] min-h-screen overflow-x-hidden bg-slate-100">
+<body class="mx-auto max-w-[1440px] overflow-x-hidden bg-slate-100">
     <div id="scroll-indicator" class="fixed z-40 top-0 h-1 bg-blue-500"></div>
     <!-- Header -->
     <header class="mx-auto flex h-28 w-4/5 justify-between text-slate-950">
@@ -60,7 +60,7 @@
     <hr class="mx-auto my-28 h-0.5 w-4/5 bg-slate-950" />
 
     <!-- List Of rows -->
-    <main class="mx-auto mb-20 w-4/5 flex flex-col" id="daftar-alat-musik">
+    <main class="mx-auto mb-48 w-4/5 flex flex-col" id="daftar-alat-musik">
         <span class="absolute left-0 top-[75rem] -z-10 h-96 w-96 bg-teal-500/20 blur-3xl"></span>
         <section class="cursor-default font-bold text-center text-4xl">
             Daftar Alat Musik
@@ -103,11 +103,11 @@
                             </span>
                         </figcaption>
                     </div>
-                   <button type='button' class='mt-8 w-4/5 py-3 rounded-md bg-green-700 text-slate-50 transition-all duration-300 ease-in-out xl:hover:bg-green-600' onclick=\"window.location.href='update-produk.php?id={$produk_id}'\">
+                   <button type='button' class='mt-8 w-4/5 py-3 rounded-md bg-green-700 text-slate-50 transition-all duration-300 ease-in-out xl:hover:bg-green-600' onclick=\"window.location.href='perbarui-produk.php?id={$produk_id}'\">
                         <i class='fa-solid fa-pencil mr-3' aria-hidden='true'></i>
                         Edit
                     </button>
-                    <button type='button' class='mt-4 w-4/5 py-3 rounded-md bg-red-500 text-slate-50 transition-all duration-300 ease-in-out xl:hover:bg-red-400' onclick=\"if(confirm('Apakah Anda yakin ingin menghapus produk ini?')) { window.location.href='utils/proses_hapus_produk.php?id={$produk_id}' }\">
+                    <button type='button' class='mt-4 w-4/5 py-3 rounded-md bg-red-500 text-slate-50 transition-all duration-300 ease-in-out xl:hover:bg-red-400' onclick=\"if(confirm('Apakah Anda yakin ingin menghapus produk ini?')) { window.location.href='utils/proses-hapus-produk.php?id={$produk_id}' }\">
                         <i class='fa-solid fa-trash mr-3' aria-hidden='true'></i>
                         Hapus
                     </button>
@@ -119,7 +119,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="mt-auto w-full flex flex-col cursor-default bg-slate-950 py-4 text-center text-white">
+    <footer class="w-full flex flex-col cursor-default bg-slate-950 py-4 text-center text-white">
         <h5>&copy; MUSIKin 2024</h5>
         <div class="flex items-center justify-center">
             <a href="https://github.com/a6iyyu" target="_blank" class="transition-all duration-300 ease-in-out xl:hover:underline xl:hover:text-slate-200">Rafi Abiyyu Airlangga</a>
